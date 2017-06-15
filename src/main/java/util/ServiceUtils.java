@@ -1,8 +1,12 @@
 package util;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import model.PostContext;
 import sun.misc.BASE64Encoder;
 
 
@@ -17,4 +21,6 @@ public class ServiceUtils {
 			throw new RuntimeException();
 		}
 	}
+
+	
 }

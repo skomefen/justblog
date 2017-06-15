@@ -1,5 +1,7 @@
 package web.controllers;
 
+
+
 import model.UserModel;
 
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import service.ClientBusiness;
@@ -16,7 +19,7 @@ import service.impl.ClientBusinessImpl;
 
 @Controller
 @SessionAttributes("user")
-public class UserController {
+public class LoginController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login(){
@@ -25,7 +28,6 @@ public class UserController {
 	
 	@RequestMapping(value="/signin", method=RequestMethod.POST)
 	public String signin(RedirectAttributes redirectAttrs,@ModelAttribute("username")String username,@ModelAttribute("password")String password,ModelMap model){
-		redirectAttrs.addAttribute("account", "redirect+login");  // Used as URI template variable
 		ClientBusiness cb = new ClientBusinessImpl();
 		try{
 			if(username==null||password==null){
@@ -42,15 +44,20 @@ public class UserController {
 			model.addAttribute("message", "·þÎñÆ÷Î´Öª´íÎó");
 			return "message";
 		}
-		return "redirect:{account}";
+		return "redirect:/home";
+	}
+	
+	@RequestMapping("signout")
+	public String signout(@ModelAttribute(value = "user")UserModel user,SessionStatus status ){
+		status.setComplete();
+		return "redirect:/home";
 	}
 	
 	
 	@RequestMapping(value="/{account}", method=RequestMethod.GET)
 	public String show(@PathVariable String account){
-		if(account.equals("redirect+login"))
-			return "home";
-		return "home";
+		
+		return "redirect:/home";
 	}
 	
 }

@@ -1,30 +1,26 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
 
-/**
- * @author Oliver
- *
- */
-public class PostModel {
-	private String id;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+public class PostForm {
+	@NotEmpty(message="没有标题")
 	private String title;
 	private String thumbnail;
 	private String postClass;
 	private String description;
-	private String contextAddress;
+	@NotEmpty(message="没有描述")
+	private String context;
 	private String author;
 	private String user_id;
 	private List<String> post_tag;
-	private Date udate;
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -49,6 +45,12 @@ public class PostModel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public String getContext() {
+		return context;
+	}
+	public void setContext(String context) {
+		this.context = context;
+	}
 	public String getAuthor() {
 		return author;
 	}
@@ -68,27 +70,18 @@ public class PostModel {
 		this.post_tag = post_tag;
 	}
 	public Date getUdate() {
-		return udate;
+		Calendar c = Calendar.getInstance();
+		return c.getTime();
 	}
-	public void setUdate(Date udate) {
-		this.udate = udate;
-	}
-	public String getContextAddress() {
-		return contextAddress;
-	}
-	public void setContextAddress(String contextAddress) {
-		this.contextAddress = contextAddress;
-	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
-		result = prime * result
-				+ ((contextAddress == null) ? 0 : contextAddress.hashCode());
+		result = prime * result + ((context == null) ? 0 : context.hashCode());
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((postClass == null) ? 0 : postClass.hashCode());
 		result = prime * result
@@ -96,7 +89,6 @@ public class PostModel {
 		result = prime * result
 				+ ((thumbnail == null) ? 0 : thumbnail.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((udate == null) ? 0 : udate.hashCode());
 		result = prime * result + ((user_id == null) ? 0 : user_id.hashCode());
 		return result;
 	}
@@ -108,26 +100,21 @@ public class PostModel {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PostModel other = (PostModel) obj;
+		PostForm other = (PostForm) obj;
 		if (author == null) {
 			if (other.author != null)
 				return false;
 		} else if (!author.equals(other.author))
 			return false;
-		if (contextAddress == null) {
-			if (other.contextAddress != null)
+		if (context == null) {
+			if (other.context != null)
 				return false;
-		} else if (!contextAddress.equals(other.contextAddress))
+		} else if (!context.equals(other.context))
 			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
 			return false;
 		if (postClass == null) {
 			if (other.postClass != null)
@@ -149,11 +136,6 @@ public class PostModel {
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
-		if (udate == null) {
-			if (other.udate != null)
-				return false;
-		} else if (!udate.equals(other.udate))
-			return false;
 		if (user_id == null) {
 			if (other.user_id != null)
 				return false;
@@ -163,15 +145,11 @@ public class PostModel {
 	}
 	@Override
 	public String toString() {
-		return "PostModel [id=" + id + ", title=" + title + ", thumbnail="
-				+ thumbnail + ", postClass=" + postClass + ", description="
-				+ description + ", contextAddress=" + contextAddress
-				+ ", author=" + author + ", user_id=" + user_id + ", post_tag="
-				+ post_tag + ", udate=" + udate + "]";
+		return "PostForm [title=" + title + ", thumbnail=" + thumbnail
+				+ ", postClass=" + postClass + ", description=" + description
+				+ ", context=" + context + ", author=" + author + ", user_id="
+				+ user_id + ", post_tag=" + post_tag + "]";
 	}
-
-
-	
 
 	
 	

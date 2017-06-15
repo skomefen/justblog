@@ -3,9 +3,11 @@ package test.dao;
 import model.UserModel;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import util.ServiceUtils;
 import dao.UserDao;
 import dao.Impl.UserDaoImpl;
 
@@ -45,7 +47,8 @@ public class UserDaoTest {
 	
 	@Test
 	public void testLogin() {
-		dao.login("xiaoming", "123");
+		System.out.println(ServiceUtils.md5("123"));
+		Assert.assertNotNull(dao.login("bbb", ServiceUtils.md5("123")));
 	}
 
 	@Test
