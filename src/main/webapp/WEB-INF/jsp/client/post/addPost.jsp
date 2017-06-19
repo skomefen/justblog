@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/addPost.css"/>"/>
     
     <!--  wmd  -->
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/wmd.css"/>"/>
@@ -38,49 +39,69 @@
 <title>添加博客</title>
 </head>
 <body>
-	<c:forEach var="e" items="${error }">
-		${e}<br>
-	</c:forEach>
-	<form action="<c:url value="/post?add"/>" method="post">
-		标题：<input type="text" name="title" maxlength="40">
-		<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
-			<tbody>
-				<tr>
-					<td valign="top" style="width:50%;">
-						<div id="wmd-toolbar" class="wmd-toolbar"></div>
-						<textarea id="wmd-input" name="context" class="wmd-input" rows="8" cols="40"></textarea>
-					</td>
-					<td valign="top">
-						<br/>
-						<div id="preview"  class="wmd-preview"></div>
-						&nbsp;
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		作者：<input type="text" name="author">
-		题头缩略图图片地址：<input type="text" name="thumbnail">
-		类别：	
-		<select name="postClass">
-	      <optgroup label="类别" >
-	      <option value = "其他">其他</option>
-	      <option value ="Java">Java</option>
-	      <option value ="javascript">javascript</option>
-	      <option value ="mysql">mysql</option> 
-	      </optgroup>
-		</select> </br>
-		属性：<textarea rows="8" cols="40" name="description"></textarea><br>
-		标签:
-		<div>
-			<input id="post_tag1" type="checkbox" name = "post_tag" value="aaa">
-			<label for="post_tag1">aaa</label>
-		</div>
-		<div>
-			<input id="post_tag2" type="checkbox" name = "post_tag" value="bbb">
-			<label for="post_tag2">bbb</label>
-		</div>
+	<%@ include file="..\..\header.jsp"%>
+	
+	<div class="container">
 		<br>
-		<input type="submit">
-	</form>
+		<c:forEach var="e" items="${error }">
+		<div class="alert alert-danger alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		  <strong>错误！</strong> ${e}
+		</div>
+			
+		</c:forEach>
+		<form action="<c:url value="/post?add"/>" method="post">
+			<div class="form-group">
+			   <label for="title">标题：</label>
+			   <input type="text" name="title" class="form-control" id="title" placeholder="标题">
+			 </div>
+			 
+			<div id="wmd-toolbar" class="wmd-toolbar"></div>
+			<textarea id="wmd-input" name="context" class="wmd-input form-control" rows="8" cols="40" placeholder="正文"></textarea>
+			<br/>
+			
+			<div id="preview"  class="wmd-preview"></div>
+			<br>
+			<br>
+			<br>
+			
+			<div class="form-inline">
+				<div class="form-group">
+					<label for="author">作者：</label>
+					<input type="text" name="author" class="form-control" id="author" placeholder="作者">
+				</div>
+				<div class="form-group">
+					<label for="thumbnail">题图：</label>
+					<input type="text" name="thumbnail" class="form-control" id="thumbnail" placeholder="图片地址">
+				</div>
+				<label for="postClass">类别：</label>
+				<select class="form-control" name="postClass" id="postClass">
+			      <optgroup label="类别" >
+			      <option value = "其他">其他</option>
+			      <option value ="Java">Java</option>
+			      <option value ="javascript">javascript</option>
+			      <option value ="mysql">mysql</option> 
+			      </optgroup>
+				</select>
+			</div>
+			 </br>
+			 <label for="description">描述：</label>
+			<textarea id="description" class="form-control" rows="3" name="description" placeholder="描述"></textarea><br>
+			<label >标签：</label><br>	
+			<div class="form-control">		
+				<label class="checkbox-inline">
+					<input id="post_tag1" type="checkbox" name = "post_tag" value="aaa">aaa
+				</label>
+				<label class="checkbox-inline">
+					<input id="post_tag2" type="checkbox" name = "post_tag" value="bbb">bbb
+				</label>
+			</div>
+			<div class="col-sm-offset-5 col-sm-7">
+				<input id="submit" type="submit" class="btn btn-default" value="写完提交">
+			</div>
+		</form>
+	</div>
+	<%@ include file="..\..\footer.jsp"%>
+	
 </body>
 </html>

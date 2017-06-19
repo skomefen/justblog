@@ -67,10 +67,17 @@ public class PostController {
 		}finally{
 			try {
 				in.close();
-				bos.close();
+				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				throw new RuntimeException(e);
+			}finally{
+				try {
+					bos.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					throw new RuntimeException(e);
+				}
 			}
 		}
 
@@ -126,6 +133,6 @@ public class PostController {
 		cb.addPost(post);
 		
 
-		return "client/post/addPost";
+		return "redirect:/home";
 	}
 }

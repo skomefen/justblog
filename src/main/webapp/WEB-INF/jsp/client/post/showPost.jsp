@@ -6,7 +6,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="<c:url value="/resources/css/showPost.css" />" rel="stylesheet" type="text/css" />	
+	
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    
     <!--  wmd  -->
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/wmd.css"/>"/>
     <script type="text/javascript" src="<c:url value="/resources/js/wmd/wmd.js"/>"></script>
@@ -36,9 +39,17 @@
 <title>博客</title>
 </head>
 <body>
-	${post.title }
-	<textarea id="wmd-input" name="context" class="wmd-input"  style="display:none">${context }</textarea>
-	<div id="preview"  class="wmd-preview"></div>
+	<%@ include file="..\..\header.jsp"%>
+	<div class="container">
+	
+		<div id="title" class="page-header">
+			<h1>${post.title } <br><small>by:${post.author}</small> </h1>
+		</div>
+
+		<textarea id="wmd-input" name="context" class="wmd-input"  style="display:none">${context }</textarea>
+		<div id="preview"  class="wmd-preview"></div>
+	</div>
+	<%@ include file="..\..\footer.jsp"%>
 	
 </body>
 </html>

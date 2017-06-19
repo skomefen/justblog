@@ -15,7 +15,7 @@ public class PostForm {
 	private String thumbnail;
 	private String postClass;
 	private String description;
-	@NotEmpty(message="没有描述")
+	@NotEmpty(message="没有正文")
 	private String context;
 	private String author;
 	private String user_id;

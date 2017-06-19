@@ -36,7 +36,7 @@
             <input type="checkbox" value="remember-me"> 记住密码
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+        <button class="btn btn-lg btn-success btn-block" type="submit">登陆</button>
         <c:if test="${ message!=null}">
 	        <div class="row">
 				<div class="col-sm-12">

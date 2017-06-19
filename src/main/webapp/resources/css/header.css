@@ -1,0 +1,11 @@
+#user_nav {
+    padding: 0px 10px 0px 0px;   
+    float: right;
+}
+#user_nav span{
+    font-size: 18px;
+}
+#header{
+    background: #333333;
+    color: white;
+}

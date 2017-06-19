@@ -22,15 +22,11 @@
 
     <div class="container">
 
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="alert alert-danger" role="alert">
-	        		<strong>${message }</strong> 
-	      		</div>
-			</div>
+		<div class="alert alert-danger alert-dismissible" role="alert">
+		  <strong>错误！</strong> ${message }
 		</div>
 
-    </div> <!-- /container -->
+    </div>
 
 
   </body>
