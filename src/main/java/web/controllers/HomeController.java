@@ -6,6 +6,7 @@ import model.PostModel;
 import model.QueryInfo;
 import model.QueryResult;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +20,8 @@ import service.impl.ClientBusinessImpl;
 @Controller
 public class HomeController {
 
+	@Autowired
+	ClientBusiness clientBusiness;
 	
 	public ModelAndView addPost(){
 		
@@ -28,11 +31,10 @@ public class HomeController {
 	
 	@ModelAttribute("queryResult")
 	public QueryResult listPostTitle(@RequestParam(defaultValue="1") int current, @RequestParam(defaultValue="15") int pageSize ){
-		ClientBusiness cb = new ClientBusinessImpl();
 		if(current<=0||pageSize<=0)
 			return null;
 		QueryInfo info = new QueryInfo(current,pageSize);
-		QueryResult qr = cb.listPost(info);
+		QueryResult qr = clientBusiness.listPost(info);
 		
 		return qr;
 	}

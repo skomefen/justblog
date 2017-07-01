@@ -8,6 +8,7 @@ import java.security.NoSuchAlgorithmException;
 
 import model.PostContext;
 import sun.misc.BASE64Encoder;
+import sun.security.util.Password;
 
 
 
@@ -22,5 +23,8 @@ public class ServiceUtils {
 		}
 	}
 
-	
+	public static String makePassword(String srcPassword){
+		
+		return md5(srcPassword+"hnjasjkfhlasdhjflkhaslfhjash");
+	}
 }

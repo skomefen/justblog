@@ -29,4 +29,8 @@ public class ServiceUtilsTest {
 		Assert.assertEquals("ICy5YqxZB1uWSwcVLSNLcA==", ServiceUtils.md5("123"));
 	}
 
+	@Test
+	public void testMakePassword(){
+		Assert.assertEquals("t3JRbEcxZimzUfuN2CwXiw==", ServiceUtils.makePassword("123"));
+	}
 }

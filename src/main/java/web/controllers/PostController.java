@@ -17,6 +17,7 @@ import model.PostModel;
 import model.UserModel;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -37,10 +38,12 @@ import util.MyWebUtils;
 @SessionAttributes("user")
 public class PostController {
 
+	@Autowired
+	ClientBusiness clientBusiness;
+	
 	@RequestMapping(params = "show", method = RequestMethod.GET)
 	public ModelAndView showPost(@RequestParam String postId) {
-		ClientBusiness cb = new ClientBusinessImpl();
-		PostModel post = cb.findPost(postId);
+		PostModel post = clientBusiness.findPost(postId);
 		String path = post.getContextAddress();
 
 		ModelAndView mv = new ModelAndView("client/post/showPost");
@@ -128,9 +131,8 @@ public class PostController {
 		
 		post.setContextAddress(path);
 		
-		ClientBusiness cb = new ClientBusinessImpl();
 		
-		cb.addPost(post);
+		clientBusiness.addPost(post);
 		
 
 		return "redirect:/home";

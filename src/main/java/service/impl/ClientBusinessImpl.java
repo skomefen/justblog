@@ -1,5 +1,10 @@
 package service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Service;
+
 import dao.PostDao;
 import dao.UserDao;
 import dao.Impl.PostDaoImpl;
@@ -12,14 +17,28 @@ import model.UserModel;
 import service.ClientBusiness;
 import util.ServiceUtils;
 
+@Scope(value="prototype")
+@Service(value="clientBusiness")
 public class ClientBusinessImpl implements ClientBusiness{
 
-	UserDao userdao = new UserDaoImpl();
+	@Autowired
+	UserDao userdao ;
+	
+	@Autowired
 	PostDao postdao = new PostDaoImpl();
 	public UserModel login(String username,String password) {
 		// TODO Auto-generated method stub
 		try{
-			return userdao.login(username, ServiceUtils.md5(password));
+			return userdao.login(username, ServiceUtils.makePassword(password));
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public void addUser(UserModel user){
+		try{
+			user.setPassword(ServiceUtils.makePassword(user.getPassword()));
+			userdao.add(user);
 		}catch(Exception e){
 			throw new RuntimeException(e);
 		}
@@ -49,7 +68,6 @@ public class ClientBusinessImpl implements ClientBusiness{
 			throw new RuntimeException(e);
 		}
 	}
-	
 
 	
 }

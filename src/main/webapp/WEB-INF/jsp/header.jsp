@@ -6,15 +6,15 @@
 <script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 <link href="<c:url value="/resources/css/header.css" />" rel="stylesheet" type="text/css" />	
-<script type="text/javascript">
 
-</script>
 <div id="header">
  	<div class="container">
 		<div class="page-header">
 			<div id="user_nav">
 				<c:if test="${user==null }">
 			 		<a class="btn btn-lg btn-default " href="${pageContext.request.contextPath }/login">登陆</a>
+			 		<a class="btn btn-lg btn-default " href="${pageContext.request.contextPath }/user?register">注册</a>
+			 		
 			 	</c:if>
 			 	<c:if test="${user!=null}">
 			 		<div class="btn-group">

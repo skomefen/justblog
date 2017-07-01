@@ -4,6 +4,7 @@ package web.controllers;
 
 import model.UserModel;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +22,9 @@ import service.impl.ClientBusinessImpl;
 @SessionAttributes("user")
 public class LoginController {
 	
+	@Autowired
+	ClientBusiness clientBusiness = null;
+	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login(){
 		return "client/user/login";
@@ -28,12 +32,11 @@ public class LoginController {
 	
 	@RequestMapping(value="/signin", method=RequestMethod.POST)
 	public String signin(RedirectAttributes redirectAttrs,@ModelAttribute("username")String username,@ModelAttribute("password")String password,ModelMap model){
-		ClientBusiness cb = new ClientBusinessImpl();
 		try{
 			if(username==null||password==null){
 				return "client/user/login";
 			}
-			UserModel user=cb.login(username, password);
+			UserModel user=clientBusiness.login(username, password);
 			
 			if(user==null){
 				model.addAttribute("message", "用户名或密码错误");
@@ -59,5 +62,13 @@ public class LoginController {
 		
 		return "redirect:/home";
 	}
+	
+	
+
+
+
+	
+	
+	
 	
 }

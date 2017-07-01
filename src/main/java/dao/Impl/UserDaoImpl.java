@@ -4,12 +4,16 @@ import java.sql.Connection;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 import util.JdbcUtil;
 import dao.UserDao;
 import exception.DaoException;
 import model.UserModel;
 
+@Scope("prototype")
+@Repository(value="userdao")
 public class UserDaoImpl implements UserDao {
 	public void add(UserModel user) {
 		Connection conn = null;

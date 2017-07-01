@@ -9,6 +9,8 @@ import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 import util.IntHandler;
 import util.JdbcUtil;
@@ -17,6 +19,8 @@ import model.QueryInfo;
 import model.QueryResult;
 import dao.PostDao;
 
+@Scope("prototype")
+@Repository(value="postdao")
 public class PostDaoImpl implements PostDao {
 
 	public void add(PostModel post) {

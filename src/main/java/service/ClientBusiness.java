@@ -1,16 +1,18 @@
 package service;
 
-import model.PostContext;
 import model.PostModel;
 import model.QueryInfo;
 import model.QueryResult;
 import model.UserModel;
+
 
 public interface ClientBusiness {
 	/**************************
 	 *     user
 	 * *************************/
 	public UserModel login(String username,String password);
+	
+	public void addUser(UserModel user);
 	
 	/**************************
 	 *     post
@@ -20,5 +22,6 @@ public interface ClientBusiness {
 	public QueryResult listPost(QueryInfo info);
 
 	public PostModel findPost(String id);
+
 	
 }

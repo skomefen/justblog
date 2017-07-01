@@ -1,10 +1,22 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Insert title here</title>
+	
+	<script type="text/javascript" src="<c:url value="/resources/js/jquery.min.js"/>"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+	<link href="<c:url value="/resources/css/header.css" />" rel="stylesheet" type="text/css" />	
+	
+	<title>404</title>
 </head>
 <body>
-服务器未知错误
+	<div class="container">
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		 	服务器未知错误
+
+		</div>
+	</div>
 </body>
 </html>
