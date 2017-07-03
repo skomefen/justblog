@@ -2,6 +2,10 @@ package model;
 
 import java.util.List;
 
+/**
+ * @author Oliver
+ *
+ */
 public class QueryResult {
 	private	List result;
 	private int total;
@@ -16,6 +20,10 @@ public class QueryResult {
 	}
 	public void setTotal(int total) {
 		this.total = total;
+	}
+	@Override
+	public String toString() {
+		return "QueryResult [result=" + result + ", total=" + total + "]";
 	}
 	
 }

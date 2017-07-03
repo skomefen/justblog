@@ -19,8 +19,6 @@ import model.QueryInfo;
 import model.QueryResult;
 import dao.PostDao;
 
-@Scope("prototype")
-@Repository(value="postdao")
 public class PostDaoImpl implements PostDao {
 
 	public void add(PostModel post) {

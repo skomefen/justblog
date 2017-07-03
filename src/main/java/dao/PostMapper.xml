@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE mapper PUBLIC 
+  "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="dao.PostMapper">
+ 
+ 	<resultMap type="model.PostModel" id="postResultMap">
+ 		<id property="id" column="id"/>
+ 		<collection property="post_tag" javaType="ArrayList" column="id" ofType="java.lang.String" select="selectTagforPost_tag"></collection>
+ 	</resultMap>
+ 
+	<select id="selectPost" resultMap="postResultMap">
+	  select * from post where id = #{id}
+	</select>
+
+	<select id="selectTagforPost_tag" resultType="java.lang.String">
+		select tag from post_tag where post_id = #{id}
+	</select>
+	
+	<select id="selectPostList" resultMap="postResultMap">
+		select * from post limit #{startIndex},#{pageSize}
+	</select>
+	
+	<select id="dao.PostMapper.postCount" resultType="int">
+		select count(*) from post
+	</select>
+	
+	<update id="updatePost" parameterType="model.PostModel">
+		update post set 
+			title = #{title},
+			thumbnail = #{thumbnail},
+			postClass = #{postClass},
+			description = #{description},
+			udate = #{udate},
+			user_id = #{user_id},
+			contextAddress = #{contextAddress},
+			author = #{author}
+		where id = #{id}
+	</update>
+	
+	<insert id="insertTagByPost" parameterType="HashMap">
+		insert into post_tag 
+			(post_id,tag)
+		value
+			<foreach item="tag" collection="tag" separator=",">
+				(#{id},#{tag})
+			</foreach>
+			
+	</insert>
+	
+	<insert id="dao.PostMapper.insertPost" parameterType="model.PostModel">
+		insert into post  
+			(id,title,thumbnail,postClass,description,udate,user_id,contextAddress,author)
+		value
+			(#{id},#{title},#{thumbnail},#{postClass},#{description},#{udate},#{user_id},#{contextAddress},#{author})
+	</insert>
+	
+	<delete id="deletePost" parameterType="java.lang.String">
+		delete from post where id = #{id}
+	</delete>
+	
+	<delete id="deleteTagByPost" parameterType="java.lang.String">
+		delete from post_tag where post_id = #{id}
+	</delete>
+	
+</mapper>

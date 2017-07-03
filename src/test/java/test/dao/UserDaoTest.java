@@ -47,8 +47,8 @@ public class UserDaoTest {
 	
 	@Test
 	public void testLogin() {
-		System.out.println(ServiceUtils.md5("123"));
-		Assert.assertNotNull(dao.login("bbb", ServiceUtils.md5("123")));
+		System.out.println(ServiceUtils.makePassword("123"));
+		Assert.assertNotNull(dao.login("bbb", ServiceUtils.makePassword("123")));
 	}
 
 	@Test

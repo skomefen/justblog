@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import dao.Impl.PostDaoImpl;
+import dao.Impl.PostDaoMybatisImpl;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PostDaoTest {
@@ -55,15 +56,6 @@ public class PostDaoTest {
 		p2.setContextAddress("aaa123");
 		p2.setUdate(c.getTime());
 		p2.setPostClass("ccc");
-	}
-
-	@Before
-	public void setUp() throws Exception {
-
-	}
-
-	@After
-	public void tearDown() throws Exception {
 	}
 
 	@Test
@@ -191,5 +183,54 @@ public class PostDaoTest {
 		Assert.assertNull(dao.find(p1.getId()));
 		Assert.assertNull(dao.find(p2.getId()));
 
+	}
+	
+	/***********************************
+	 * mabatis
+	 ***********************************/
+	@Test
+	public void test6add(){
+		
+		p1.setId("1232121222");
+		p1.setTitle("hahaha");
+		
+		PostDaoMybatisImpl dao = new PostDaoMybatisImpl();
+		dao.add(p1);
+	}
+	
+	@Test
+	public void test7update(){
+		PostDaoMybatisImpl dao = new PostDaoMybatisImpl();
+		PostModel p = dao.find("123333");
+		p.setTitle("helloworld!!!");
+		
+		List<String> post_tag = new ArrayList<String>();
+		post_tag.add("ccc");
+		post_tag.add("ddd");
+		
+		p.setPost_tag(post_tag);
+		
+		dao.update(p);
+		
+		p = dao.find("123333");
+		System.out.println(p);
+	}
+	@Test
+	public void test8find(){
+		PostDaoMybatisImpl dao = new PostDaoMybatisImpl();
+		PostModel p = dao.find("123333");
+		System.out.println(p);
+	}
+	@Test
+	public void test9delete(){
+		PostDaoMybatisImpl dao = new PostDaoMybatisImpl();
+		dao.delete("1232121222");
+	}
+	@Test
+	public void test9findList(){
+		PostDaoMybatisImpl dao = new PostDaoMybatisImpl();
+		QueryInfo info = new QueryInfo(1, 5);
+		QueryResult qr = dao.findList(info);
+		System.out.println(qr);
 	}
 }
